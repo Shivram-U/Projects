@@ -1,0 +1,1 @@
+This is a Project written in java, a Chat Application for Personal Computers under a Local Network for Communication. 
