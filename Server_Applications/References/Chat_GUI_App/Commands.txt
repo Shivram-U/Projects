@@ -1,0 +1,12 @@
+JAVA_PACKAGE: Chat_App/
+DATA_FILES: Resources/
+Commands:
+1. All Java files Compilation with Package Reference Command:
+    $ javac -cp "D:\Shivram_U\Sources\Software\Project_Sys_WorkSpace\Android_App_Projects\General_Chat\Server_Applications\Java_Libraries\json-simple-1.1.1.jar;." -d . Host_Interface.java Chat_Server.java Chat_Client.java Server_Input_Thread.java identity.java Client_Connection.java
+2. Chat_App Application Execution/Start_up Command:
+    $ java -cp "D:\Shivram_U\Sources\Software\Project_Sys_WorkSpace\Android_App_Projects\General_Chat\Server_Applications\Java_Libraries\json-simple-1.1.1.jar;." Chat_App.Host_Interface     
+
+NOTE:
+1. Classpath
+    "D:\Shivram_U\Sources\Software\Project_Sys_WorkSpace\Android_App_Projects\General_Chat\Server_Applications\Java_Libraries\json-simple-1.1.1.jar;." 
+    The Above Class Path includes the 1.json-simple-1.1.1.jar file and the Current Directory.

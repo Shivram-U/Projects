@@ -1,0 +1,92 @@
+Working Method:
+1.
+    I apologize for the confusion. You are correct; JLayeredPane does not work well with JScrollPane for scrolling purposes because it does not provide built-in support for scrolling.
+
+    If you require both absolute positioning and scrolling, you can consider using a custom solution. One approach is to extend JPanel and override its getPreferredSize() method to return the preferred size of the content panel. Then, you can place this custom panel inside a JScrollPane for scrolling behavior.
+
+    Here's an example of how you can implement this approach:
+
+    java
+    Copy code
+    import javax.swing.*;
+    import java.awt.*;
+
+    class ScrollablePanel extends JPanel {
+        private Dimension contentSize;
+
+        public ScrollablePanel() {
+            setLayout(null);
+            contentSize = new Dimension(0, 0);
+        }
+
+        public void setContentSize(Dimension size) {
+            contentSize = size;
+        }
+
+        @Override
+        public Dimension getPreferredSize() {
+            return contentSize;
+        }
+    }
+
+    // Usage:
+    JPanel contentPanel = new ScrollablePanel();
+    contentPanel.setLayout(null);
+
+    // Add components and set their location and size
+    JButton button1 = new JButton("Button 1");
+    button1.setBounds(10, 10, 80, 30); // x, y, width, height
+    contentPanel.add(button1);
+
+    JButton button2 = new JButton("Button 2");
+    button2.setBounds(100, 10, 80, 30); // x, y, width, height
+    contentPanel.add(button2);
+
+    // Calculate and set the preferred size of the content panel
+    Dimension contentSize = calculateContentSize(); // Implement this method to calculate the size based on your components
+    contentPanel.setContentSize(contentSize);
+
+    // Create a JScrollPane and set the content panel as its viewport view
+    JScrollPane scrollPane = new JScrollPane(contentPanel);
+    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+    // Add the scroll pane to the frame or container
+    frame.add(scrollPane);
+    In this example, we create a custom ScrollablePanel class that extends JPanel. The ScrollablePanel overrides the getPreferredSize() method to return the preferred size of the content panel. You need to implement the calculateContentSize() method to calculate the size based on your components.
+
+    By using this custom panel, you can achieve both absolute positioning and scrolling behavior within the JScrollPane.
+
+Not Working tried Methods:
+1.
+    Apologies for the confusion. Unfortunately, a JPanel with a null layout does not support automatic scrolling. The JScrollPane component relies on a layout manager to determine the preferred size and position of its contents for scrollable behavior.
+
+    If you want to have a scrollable panel with components positioned absolutely, you can consider using a different container that supports absolute positioning, such as JLayeredPane or JDesktopPane, within the JScrollPane.
+
+    Here's an example of how you can achieve this:
+
+    java
+    Copy code
+    // Create a JLayeredPane or JDesktopPane for absolute positioning
+    JLayeredPane layeredPane = new JLayeredPane();
+    layeredPane.setLayout(null);
+
+    // Add components and set their location and size
+    JButton button1 = new JButton("Button 1");
+    button1.setBounds(10, 10, 80, 30); // x, y, width, height
+    layeredPane.add(button1, JLayeredPane.DEFAULT_LAYER);
+
+    JButton button2 = new JButton("Button 2");
+    button2.setBounds(100, 10, 80, 30); // x, y, width, height
+    layeredPane.add(button2, JLayeredPane.DEFAULT_LAYER);
+
+    // Create a JScrollPane and set the layered pane as its viewport view
+    JScrollPane scrollPane = new JScrollPane(layeredPane);
+    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+    // Add the scroll pane to the frame or container
+    frame.add(scrollPane);
+    In this example, we create a JLayeredPane as the container for absolute positioning of components. Components are added to the layered pane with specific locations and sizes using the setBounds() method. Then, the JLayeredPane is added as the viewport view of the JScrollPane. By setting appropriate scroll bar policies, you can enable scrolling in both horizontal and vertical directions.
+
+    Please note that when using absolute positioning, you need to carefully manage the positions and sizes of components to avoid overlapping or unintended layout issues.
